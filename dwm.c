@@ -1802,8 +1802,6 @@ setfullscreen(Client *c, int fullscreen)
 void
 setlayout(const Arg *arg)
 {
-    Layout *layout;
-
     selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
     if (arg && arg->v && arg->v != selmon->lt[selmon->sellt ^ 1]) {
         // Toggle tile layout
