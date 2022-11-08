@@ -1804,17 +1804,10 @@ setlayout(const Arg *arg)
 {
     Layout *layout;
 
-    if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt]) {
-		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
-    }
-	if (arg && arg->v) {
+    selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
+    if (arg && arg->v && arg->v != selmon->lt[selmon->sellt ^ 1]) {
         // Toggle tile layout
-        if (arg->v == selmon->lt[selmon->sellt]) {
-            layout = (Layout *)selmon->lt[selmon->sellt^1];
-        } else {
-            layout = (Layout *)arg->v;
-        }
-		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = layout;
+		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
     }
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	if (selmon->sel) {
