@@ -1809,8 +1809,8 @@ setlayout(const Arg *arg)
     }
 	if (arg && arg->v) {
         // Toggle tile layout
-        if ((arg->v == selmon->lt[selmon->sellt])) {
-            layout = (Layout *)&layouts[0];
+        if (arg->v == selmon->lt[selmon->sellt]) {
+            layout = (Layout *)selmon->lt[selmon->sellt^1];
         } else {
             layout = (Layout *)arg->v;
         }
