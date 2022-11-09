@@ -1802,11 +1802,12 @@ setfullscreen(Client *c, int fullscreen)
 void
 setlayout(const Arg *arg)
 {
-    selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
-    if (arg && arg->v && arg->v != selmon->lt[selmon->sellt ^ 1]) {
-        // Toggle tile layout
-		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
-    }
+    // Toggle layout
+    selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
+    selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
+    if (arg && arg->v && arg->v != selmon->lt[selmon->sellt ^ 1])
+		selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
+    selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	if (selmon->sel) {
 		arrange(selmon);
