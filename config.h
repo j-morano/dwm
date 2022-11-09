@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#define SESSION_FILE "/tmp/dwm-session"
+
 /* appearance */
 static const unsigned int borderpx  = 8;        /* border pixel of windows */
 static const unsigned int gappx     = 8;        /* gaps between windows */
@@ -110,7 +112,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ALTKEY,             XK_f,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY|ALTKEY,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ALTKEY,             XK_comma,  tagmon,         {.i = -1 } },
