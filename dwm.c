@@ -1753,17 +1753,26 @@ scan(void)
 void
 sendmon(Client *c, Monitor *m)
 {
+    int hadfocus;
+
 	if (c->mon == m)
 		return;
+    hadfocus = (c == selmon->sel);
 	unfocus(c, 1);
 	detach(c);
 	detachstack(c);
+    arrange(c->mon);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
 	attachaside(c);
 	attachstack(c);
-	focus(NULL);
-	arrange(NULL);
+    arrange(m);
+    if (hadfocus) {
+        focus(c);
+        restack(m);
+    } else {
+        focus(NULL);
+    }
 }
 
 void
