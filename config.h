@@ -101,7 +101,6 @@ static const Key keys[] = {
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_y,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_t,      incnmaster,     {.i = -1 } },
-    { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
     { MODKEY|ALTKEY,                       XK_ntilde,      setmfact,       {.f = -0.05} },
     { MODKEY|ALTKEY,                       XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY,                       XK_i, zoom,           {0} },
