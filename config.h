@@ -88,8 +88,9 @@ static const Key keys[] = {
     { MODKEY,             XK_dead_grave, spawn,          RUNCMD("file_manager") },
     { MODKEY|ALTKEY,       XK_dead_grave, spawn,          RUNCMD("terminal_file_manager") },
     { MODKEY|ShiftMask,                       XK_l, spawn,           RUNCMD("lock") },
-    { MODKEY,           XK_l,  switchcol,    {0} },
-    { MODKEY,           XK_ntilde,  switchcol,    {0} },
+    /* { MODKEY,           XK_l,  switchcol,    {0} }, */
+    /* { MODKEY,           XK_ntilde,  switchcol,    {0} }, */
+    { MODKEY,           XK_i,  switchcol,    {0} },
     { MODKEY,           XK_r,  swapfocus,    {0} },
     { ALTKEY,             XK_plus, spawn,          RUNCMD("volume_up") },
     { ALTKEY,             XK_minus, spawn,          RUNCMD("volume_down") },
@@ -103,7 +104,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_t,      incnmaster,     {.i = -1 } },
     { MODKEY|ALTKEY,                       XK_ntilde,      setmfact,       {.f = -0.05} },
     { MODKEY|ALTKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-    { MODKEY,                       XK_i, zoom,           {0} },
+    { MODKEY|ALTKEY,                       XK_i, zoom,           {0} },
+    { MODKEY,                       XK_p, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY,             XK_q,      killclient,     {0} },
     { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[0]} },
