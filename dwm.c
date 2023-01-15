@@ -1115,8 +1115,11 @@ focusstackiso(const Arg *arg)
                     (sel_num >= selmon->nmaster && c_num < selmon->nmaster)
                     || (sel_num < selmon->nmaster && c_num >= selmon->nmaster)
                 )
-                && 
-                (selmon->lt[selmon->sellt] != (Layout *)&layouts[2])
+                // Do it only for tile and deck layouts
+                && (
+                    (selmon->lt[selmon->sellt] == (Layout *)&layouts[0])
+                    || (selmon->lt[selmon->sellt] == (Layout *)&layouts[3])
+                )
             ) {
                 repeat = 1;
                 unfocus(selmon->sel, 0);
