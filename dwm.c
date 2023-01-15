@@ -197,6 +197,7 @@ static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
+static void focusstackiso(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
@@ -1053,14 +1054,11 @@ focusmon(const Arg *arg)
     warp(selmon->sel);
 }
 
-void
-focusstack(const Arg *arg)
-{
-    Client *c = NULL, *i;
 
-    if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
-        return;
-    if (arg->i > 0) {
+Client *
+focusstack_i(int arg_i) {
+    Client *c = NULL, *i;
+    if (arg_i > 0) {
         for (c = selmon->sel->next; c && !ISVISIBLE(c); c = c->next);
         if (!c)
             for (c = selmon->clients; c && !ISVISIBLE(c); c = c->next);
@@ -1073,6 +1071,55 @@ focusstack(const Arg *arg)
                 if (ISVISIBLE(i))
                     c = i;
     }
+    return c;
+}
+
+void
+focusstackiso(const Arg *arg)
+{
+    /* Focus the next or previous client of the same type (master/stack),
+     * skipping the master window (for certain layouts) if there is only
+     * one. */
+    Client *c = NULL;
+    int repeat = 1;
+
+    if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
+        return;
+
+    while (repeat) {
+        c = focusstack_i(arg->i);
+
+        if (c) {
+            repeat = (
+                c == selmon->clients
+                && selmon->sel != c
+                && selmon->nmaster == 1
+                && (
+                    // Do it only for tile and deck layouts
+                    (selmon->lt[selmon->sellt] == (Layout *)&layouts[0])
+                    || (selmon->lt[selmon->sellt] == (Layout *)&layouts[3])
+                )
+            );
+            if (repeat) {
+                unfocus(selmon->sel, 0);
+                selmon->sel = c;
+            }
+        }
+    }
+    if (c) {
+        focus(c);
+        restack(selmon);
+    }
+}
+
+void
+focusstack(const Arg *arg)
+{
+    Client *c = NULL;
+
+    if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
+        return;
+    c = focusstack_i(arg->i);
     if (c) {
         focus(c);
         restack(selmon);
