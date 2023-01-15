@@ -1080,30 +1080,27 @@ focusstackiso(const Arg *arg)
     /* Focus the next or previous client of the same type (master/stack),
      * skipping the master window (for certain layouts) if there is only
      * one. */
-    Client *c = NULL;
-    int repeat = 1;
+    Client *c = NULL, *master;
+
+    master = nexttiled(selmon->clients);
 
     if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
         return;
 
-    while (repeat) {
+    while (1) {
         c = focusstack_i(arg->i);
-
-        if (c) {
-            repeat = (
-                c == selmon->clients
-                && selmon->sel != c
-                && selmon->nmaster == 1
-                && (
-                    // Do it only for tile and deck layouts
-                    (selmon->lt[selmon->sellt] == (Layout *)&layouts[0])
-                    || (selmon->lt[selmon->sellt] == (Layout *)&layouts[3])
-                )
-            );
-            if (repeat) {
-                unfocus(selmon->sel, 0);
-                selmon->sel = c;
-            }
+        if (
+            c
+            && c == master
+            && selmon->sel != c
+            && selmon->nmaster == 1
+            && !(selmon->lt[selmon->sellt] == (Layout *)&layouts[1])
+            && !(selmon->lt[selmon->sellt] == (Layout *)&layouts[2])
+        ) {
+            unfocus(selmon->sel, 0);
+            selmon->sel = c;
+        } else {
+            break;
         }
     }
     if (c) {
