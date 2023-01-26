@@ -34,7 +34,7 @@ static const char *colors[][5]      = {
 
 /* tagging */
 static const char *tags[] = {
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "z", "x", "n", "m", "h"
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "z", "x", "n", "m", "g", "h"
 };
 
 static const Rule rules[] = {
@@ -94,7 +94,7 @@ static const Key keys[] = {
     { MODKEY,           XK_r,  swapfocus,    {0} },
     { ALTKEY,             XK_plus, spawn,          RUNCMD("volume_up") },
     { ALTKEY,             XK_minus, spawn,          RUNCMD("volume_down") },
-    { MODKEY,             XK_g, spawn,          RUNCMD("reset_kb_settings") },
+    { MODKEY,             XK_v, spawn,          RUNCMD("reset_kb_settings") },
     { MODKEY|ALTKEY,             XK_j,      movestack,      {.i = +1 } },
     { MODKEY|ALTKEY,             XK_k,      movestack,      {.i = -1 } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
@@ -135,7 +135,8 @@ static const Key keys[] = {
     TAGKEYS(                        XK_x,                      10)
     TAGKEYS(                        XK_n,                      11)
     TAGKEYS(                        XK_m,                      12)
-    TAGKEYS(                        XK_h,                      13)
+    TAGKEYS(                        XK_g,                      13)
+    TAGKEYS(                        XK_h,                      14)
     { MODKEY|ALTKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
     { MODKEY|ALTKEY,             XK_BackSpace,      quit,           {1} },
 };
