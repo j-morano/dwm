@@ -149,7 +149,7 @@ static const Button buttons[] = {
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button1,        zoom,           {0} },
-    { ClkWinTitle,          0,              Button2,        killclient,     {0} },
+    { ClkWinTitle,          0,              Button3,        killclient,     {0} },
     { ClkWinTitle,          0,              Button4,        focusstackiso,     {-1} },
     { ClkWinTitle,          0,              Button5,        focusstackiso,     {+1} },
     { ClkStatusText,        0,              Button2,        spawn,          RUNCMD("terminal") },
