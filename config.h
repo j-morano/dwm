@@ -148,7 +148,7 @@ static const Key keys[] = {
 static const Button buttons[] = {
     /* click                event mask      button          function        argument */
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-    { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+    { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[3]} },
     { ClkWinTitle,          0,              Button1,        zoom,           {0} },
     { ClkWinTitle,          0,              Button3,        killclient,     {0} },
     { ClkWinTitle,          0,              Button4,        focusstackiso,     {-1} },
