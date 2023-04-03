@@ -1,5 +1,17 @@
 # Useful documentation
 
+## Installation
+
+```sh
+# Dependencies
+sudo dnf install dnf libX11-devel libXft-devel libXinerama-devel libXrandr-devel xorg-x11-xinit-session
+# Installation command
+make && sudo make install
+# Xsessions
+sudo cp dwm.desktop /usr/share/xsessions/
+```
+
+
 ## See the logs
 
 ```
