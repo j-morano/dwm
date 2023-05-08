@@ -35,7 +35,7 @@ static const char *colors[][5]      = {
 /* tagging */
 static const char *tags[] = {
     "1", "2", "3", "4", "5", "6", "7", "8", "9",
-    "e", "r", "z", "x", "n", "m", "g", "h"
+    "e", "r", "z", "n", "m", "g", "h", "x"
 };
 
 static const Rule rules[] = {
@@ -92,7 +92,8 @@ static const Key keys[] = {
     /* { MODKEY,           XK_l,  switchcol,    {0} }, */
     /* { MODKEY,           XK_ntilde,  switchcol,    {0} }, */
     { MODKEY,           XK_i,  switchcol,    {0} },
-    { MODKEY,           XK_a,  swapfocus,    {0} },
+    /* { MODKEY,           XK_a,  swapfocus,    {0} }, */
+    { MODKEY,           XK_a,  view,    {0} },
     { ALTKEY,             XK_plus, spawn,          RUNCMD("volume_up") },
     { ALTKEY,             XK_minus, spawn,          RUNCMD("volume_down") },
     { MODKEY,             XK_v, spawn,          RUNCMD("reset_kb_settings") },
@@ -107,7 +108,7 @@ static const Key keys[] = {
     { MODKEY|ALTKEY,                       XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY|ALTKEY,                       XK_i, zoom,           {0} },
     { MODKEY,                       XK_p, zoom,           {0} },
-    { MODKEY,                       XK_space,    view,           {0} },
+    /* { MODKEY,                       XK_space,    view,           {0} }, */
     { MODKEY,             XK_q,      killclient,     {0} },
     { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[0]} },
     { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[1]} },
@@ -135,11 +136,11 @@ static const Key keys[] = {
     TAGKEYS(                        XK_e,                      9)
     TAGKEYS(                        XK_r,                      10)
     TAGKEYS(                        XK_z,                      11)
-    TAGKEYS(                        XK_x,                      12)
-    TAGKEYS(                        XK_n,                      13)
-    TAGKEYS(                        XK_m,                      14)
-    TAGKEYS(                        XK_g,                      15)
-    TAGKEYS(                        XK_h,                      16)
+    TAGKEYS(                        XK_n,                      12)
+    TAGKEYS(                        XK_m,                      13)
+    TAGKEYS(                        XK_g,                      14)
+    TAGKEYS(                        XK_h,                      15)
+    TAGKEYS(                        XK_space,                  16)
     { MODKEY|ALTKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
     { MODKEY|ALTKEY,             XK_BackSpace,      quit,           {1} },
 };
