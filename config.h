@@ -21,14 +21,18 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char col_blue[]        = "#a3cbff";
 static const char col_magenta[]        = "#f396ff";
+static const char col_magenta_gray[]        = "#9a7a9e";
 static const char col_green[]        = "#a3ffcf";
+static const char col_green_gray[]        = "#72a188";
 static const char col_yellow[]        = "#ffeba3";
 static const char *colors[][5]      = {
     /*               fg         bg         border   */
     [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
     [SchemeSel]  = { col_gray4, col_cyan,  col_blue  },
     [SchemeSelDeck]  = { col_gray4, col_cyan,  col_magenta  },
+    [SchemeSelDeckSingle]  = { col_gray4, col_cyan,  col_magenta_gray  },
     [SchemeSelMax]  = { col_gray4, col_cyan,  col_green  },
+    [SchemeSelMaxSingle]  = { col_gray4, col_cyan,  col_green_gray  },
     [SchemeSelFloat]  = { col_gray4, col_cyan,  col_yellow  },
 };
 
@@ -89,10 +93,7 @@ static const Key keys[] = {
     { MODKEY,             XK_dead_grave, spawn,          RUNCMD("file_manager") },
     { MODKEY|ALTKEY,       XK_dead_grave, spawn,          RUNCMD("terminal_file_manager") },
     { MODKEY|ShiftMask,                       XK_l, spawn,           RUNCMD("lock") },
-    /* { MODKEY,           XK_l,  switchcol,    {0} }, */
-    /* { MODKEY,           XK_ntilde,  switchcol,    {0} }, */
     { MODKEY,           XK_i,  switchcol,    {0} },
-    /* { MODKEY,           XK_a,  swapfocus,    {0} }, */
     { MODKEY,           XK_a,  view,    {0} },
     { ALTKEY,             XK_plus, spawn,          RUNCMD("volume_up") },
     { ALTKEY,             XK_minus, spawn,          RUNCMD("volume_down") },
@@ -108,7 +109,6 @@ static const Key keys[] = {
     { MODKEY|ALTKEY,                       XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY|ALTKEY,                       XK_i, zoom,           {0} },
     { MODKEY,                       XK_p, zoom,           {0} },
-    /* { MODKEY,                       XK_space,    view,           {0} }, */
     { MODKEY,             XK_q,      killclient,     {0} },
     { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[0]} },
     { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[1]} },

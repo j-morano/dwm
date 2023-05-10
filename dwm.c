@@ -73,7 +73,15 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeSelDeck, SchemeSelMax, SchemeSelFloat }; /* color schemes */
+enum { /* color schemes */
+    SchemeNorm,
+    SchemeSel,
+    SchemeSelDeck,
+    SchemeSelDeckSingle,
+    SchemeSelMax,
+    SchemeSelMaxSingle,
+    SchemeSelFloat,
+};
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -196,7 +204,6 @@ static void expose(XEvent *e);
 static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
-static void focusstack(const Arg *arg);
 static void focusstackiso(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
@@ -243,7 +250,6 @@ static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void switchcol(const Arg *arg);
-static void swapfocus();
 static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
@@ -456,6 +462,28 @@ attachBelow(Client *c)
 	c->mon->sel->next = c;
 
 }
+
+
+int
+get_n_stacked(Monitor *m)
+{
+    int n = 0;
+    Client *c;
+
+
+    if (selmon->lt[selmon->sellt] == (Layout *)&layouts[2]) {
+        for (c = m->clients; c; c = c->next)
+            if (ISVISIBLE(c))
+                n++;
+    }
+    // If the layout is deck, subtract the number of windows in the master area
+    else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[3]) {
+        for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+        n -= m->nmaster;
+    }
+    return n;
+}
+
 
 void
 arrange(Monitor *m)
@@ -1009,15 +1037,24 @@ focus(Client *c)
         if (c->isfloating) {
             XSetWindowBorder(dpy, c->win, scheme[SchemeSelFloat][ColBorder].pixel);
         } else {
-            // Apply custom border color for the deck layout
-            if (selmon->lt[selmon->sellt] == (Layout *)&layouts[3])
-                XSetWindowBorder(dpy, c->win, scheme[SchemeSelDeck][ColBorder].pixel);
-            else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[2])
-                XSetWindowBorder(dpy, c->win, scheme[SchemeSelMax][ColBorder].pixel);
-            else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[1])
+            // Apply custom border colors depending on layout
+            if (selmon->lt[selmon->sellt] == (Layout *)&layouts[3]) {
+                if (get_n_stacked(selmon) > 1) {
+                    XSetWindowBorder(dpy, c->win, scheme[SchemeSelDeck][ColBorder].pixel);
+                } else {
+                    XSetWindowBorder(dpy, c->win, scheme[SchemeSelDeckSingle][ColBorder].pixel);
+                }
+            } else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[2]) {
+                if (get_n_stacked(selmon) > 1) {
+                    XSetWindowBorder(dpy, c->win, scheme[SchemeSelMax][ColBorder].pixel);
+                } else {
+                    XSetWindowBorder(dpy, c->win, scheme[SchemeSelMaxSingle][ColBorder].pixel);
+                }
+            } else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[1]) {
                 XSetWindowBorder(dpy, c->win, scheme[SchemeSelFloat][ColBorder].pixel);
-            else
+            } else {
                 XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+            }
         }
         setfocus(c);
     } else {
@@ -1108,19 +1145,6 @@ focusstackiso(const Arg *arg)
     }
 }
 
-void
-focusstack(const Arg *arg)
-{
-    Client *c = NULL;
-
-    if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
-        return;
-    c = focusstack_i(arg->i);
-    if (c) {
-        focus(c);
-        restack(selmon);
-    }
-}
 
 Atom
 getatomprop(Client *c, Atom prop)
@@ -2118,16 +2142,6 @@ spawn(const Arg *arg)
     }
 }
 
-void
-swapfocus()
-{
-    Client *c;
-    for(c = selmon->clients; c && c != prevclient; c = c->next) ;
-    if(c == prevclient) {
-        focus(prevclient);
-        restack(prevclient->mon);
-    }
-}
 
 void
 switchcol(const Arg *arg)
