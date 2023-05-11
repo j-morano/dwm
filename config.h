@@ -145,6 +145,7 @@ static const Key keys[] = {
     TAGKEYS(                        XK_m,                      13)
     TAGKEYS(                        XK_g,                      14)
     TAGKEYS(                        XK_h,                      15)
+    TAGKEYS(                        XK_x,                      16)
     TAGKEYS(                        XK_space,                  16)
     { MODKEY|ALTKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
     { MODKEY|ALTKEY,             XK_BackSpace,      quit,           {1} },
