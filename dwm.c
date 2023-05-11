@@ -471,13 +471,13 @@ get_n_stacked(Monitor *m)
     Client *c;
 
 
-    if (selmon->lt[selmon->sellt] == (Layout *)&layouts[2]) {
+    if (selmon->lt[selmon->sellt] == MONOCLE) {
         for (c = m->clients; c; c = c->next)
             if (ISVISIBLE(c))
                 n++;
     }
     // If the layout is deck, subtract the number of windows in the master area
-    else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[3]) {
+    else if (selmon->lt[selmon->sellt] == DECK) {
         for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
         n -= m->nmaster;
     }
@@ -1038,20 +1038,22 @@ focus(Client *c)
             XSetWindowBorder(dpy, c->win, scheme[SchemeSelFloat][ColBorder].pixel);
         } else {
             // Apply custom border colors depending on layout
-            if (selmon->lt[selmon->sellt] == (Layout *)&layouts[3]) {
+            if (selmon->lt[selmon->sellt] == DECK) {
                 if (get_n_stacked(selmon) > 1) {
                     XSetWindowBorder(dpy, c->win, scheme[SchemeSelDeck][ColBorder].pixel);
                 } else {
                     XSetWindowBorder(dpy, c->win, scheme[SchemeSelDeckSingle][ColBorder].pixel);
                 }
-            } else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[2]) {
+            } else if (selmon->lt[selmon->sellt] == MONOCLE) {
                 if (get_n_stacked(selmon) > 1) {
                     XSetWindowBorder(dpy, c->win, scheme[SchemeSelMax][ColBorder].pixel);
                 } else {
                     XSetWindowBorder(dpy, c->win, scheme[SchemeSelMaxSingle][ColBorder].pixel);
                 }
-            } else if (selmon->lt[selmon->sellt] == (Layout *)&layouts[1]) {
+            } else if (selmon->lt[selmon->sellt] == FLOAT) {
                 XSetWindowBorder(dpy, c->win, scheme[SchemeSelFloat][ColBorder].pixel);
+            } else if (selmon->lt[selmon->sellt] == TILE) {
+                XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
             } else {
                 XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
             }
@@ -1130,8 +1132,8 @@ focusstackiso(const Arg *arg)
             && c == master
             && selmon->sel != c
             && selmon->nmaster == 1
-            && !(selmon->lt[selmon->sellt] == (Layout *)&layouts[1])
-            && !(selmon->lt[selmon->sellt] == (Layout *)&layouts[2])
+            && !(selmon->lt[selmon->sellt] == FLOAT)
+            && !(selmon->lt[selmon->sellt] == MONOCLE)
         ) {
             unfocus(selmon->sel, 0);
             selmon->sel = c;

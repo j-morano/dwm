@@ -67,6 +67,11 @@ static const Layout layouts[] = {
     { "|D",       deck },
 };
 
+static const Layout* TILE = (Layout *) &layouts[0];
+static const Layout* FLOAT = (Layout *) &layouts[1];
+static const Layout* MONOCLE = (Layout *) &layouts[2];
+static const Layout* DECK = (Layout *) &layouts[3];
+
 /* key definitions */
 #define ALTKEY Mod1Mask
 #define MODKEY Mod4Mask
