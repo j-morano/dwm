@@ -92,7 +92,7 @@ static const char runcmdpath[128] = "/home/morano/.config/suckless/run_cmd";
 #include "movestack.c"
 static const Key keys[] = {
     /* modifier                     key        function        argument */
-    { MODKEY,                       XK_c,      spawn,          RUNCMD("dmenu") },
+    { MODKEY,                       XK_c,      spawn,          RUNCMD("launcher") },
     { MODKEY,             XK_Return, spawn,          RUNCMD("terminal") },
     { MODKEY,             XK_dead_acute, spawn,          RUNCMD("web_browser") },
     { MODKEY,             XK_dead_grave, spawn,          RUNCMD("file_manager") },
