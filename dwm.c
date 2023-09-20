@@ -274,6 +274,7 @@ static void updatesystrayiconstate(Client *i, XPropertyEvent *ev);
 static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
+static void go_to_prev_tag(const Arg *arg);
 static void view(const Arg *arg);
 static void warp(const Client *c);
 static Client *wintoclient(Window w);
@@ -2717,6 +2718,15 @@ updatewmhints(Client *c)
         XFree(wmh);
     }
 }
+
+void
+go_to_prev_tag(const Arg *arg)
+{
+    Arg a;
+    a.ui = selmon->tagset[selmon->seltags];
+    view(&a);
+}
+
 
 void
 view(const Arg *arg)

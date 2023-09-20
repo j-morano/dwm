@@ -129,6 +129,7 @@ static const Key keys[] = {
     { MODKEY|ALTKEY,             XK_period, tagmon,         {.i = +1 } },
     { MODKEY|ALTKEY,             XK_o, tagmon,         {.i = +1 } },
     { MODKEY,             XK_o, focusmon,         {.i = +1 } },
+    { MODKEY,             XK_space, go_to_prev_tag,         {0} },
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
@@ -146,7 +147,6 @@ static const Key keys[] = {
     TAGKEYS(                        XK_g,                      14)
     TAGKEYS(                        XK_h,                      15)
     TAGKEYS(                        XK_x,                      16)
-    TAGKEYS(                        XK_space,                  16)
     { MODKEY|ALTKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
     { MODKEY|ALTKEY,             XK_BackSpace,      quit,           {1} },
 };
