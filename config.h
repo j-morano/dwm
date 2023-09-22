@@ -39,7 +39,7 @@ static const char *colors[][5]      = {
 /* tagging */
 static const char *tags[] = {
     "1", "2", "3", "4", "5", "6", "7", "8", "9",
-    "e", "r", "z", "n", "m", "g", "h", "x"
+    "10", "e", "r", "z", "n", "m", "g", "h", "x"
 };
 
 static const Rule rules[] = {
@@ -121,8 +121,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_w,      setlayout,      {.v = &layouts[3]} },
     { MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
     { MODKEY|ALTKEY,             XK_f,  togglefloating, {0} },
-    { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-    { MODKEY|ALTKEY,             XK_0,      tag,            {.ui = ~0 } },
+    { MODKEY|ShiftMask,                       XK_0,      view,           {.ui = ~0 } },
+    { MODKEY|ALTKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
     { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
     { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
     { MODKEY|ALTKEY,             XK_comma,  tagmon,         {.i = -1 } },
@@ -139,14 +139,15 @@ static const Key keys[] = {
     TAGKEYS(                        XK_7,                      6)
     TAGKEYS(                        XK_8,                      7)
     TAGKEYS(                        XK_9,                      8)
-    TAGKEYS(                        XK_e,                      9)
-    TAGKEYS(                        XK_r,                      10)
-    TAGKEYS(                        XK_z,                      11)
-    TAGKEYS(                        XK_n,                      12)
-    TAGKEYS(                        XK_m,                      13)
-    TAGKEYS(                        XK_g,                      14)
-    TAGKEYS(                        XK_h,                      15)
-    TAGKEYS(                        XK_x,                      16)
+    TAGKEYS(                        XK_0,                      9)
+    TAGKEYS(                        XK_e,                      10)
+    TAGKEYS(                        XK_r,                      11)
+    TAGKEYS(                        XK_z,                      12)
+    TAGKEYS(                        XK_n,                      13)
+    TAGKEYS(                        XK_m,                      14)
+    TAGKEYS(                        XK_g,                      15)
+    TAGKEYS(                        XK_h,                      16)
+    TAGKEYS(                        XK_x,                      17)
     { MODKEY|ALTKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
     { MODKEY|ALTKEY,             XK_BackSpace,      quit,           {1} },
 };
