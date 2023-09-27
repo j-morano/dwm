@@ -94,6 +94,7 @@ static const Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          RUNCMD("launcher") },
     { MODKEY,             XK_Return, spawn,          RUNCMD("terminal") },
+    { MODKEY,             XK_apostrophe,  spawn,       RUNCMD("date") },
     { MODKEY,             XK_dead_acute, spawn,          RUNCMD("web_browser") },
     { MODKEY,             XK_dead_grave, spawn,          RUNCMD("file_manager") },
     { MODKEY|ALTKEY,       XK_dead_grave, spawn,          RUNCMD("terminal_file_manager") },
