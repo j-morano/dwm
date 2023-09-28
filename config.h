@@ -122,8 +122,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_w,      setlayout,      {.v = &layouts[3]} },
     { MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
     { MODKEY|ALTKEY,             XK_f,  togglefloating, {0} },
-    { MODKEY|ShiftMask,                       XK_0,      view,           {.ui = ~0 } },
-    { MODKEY|ALTKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+    /* { MODKEY|ShiftMask,                       XK_0,      view,           {.ui = ~0 } }, */
+    /* { MODKEY|ALTKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } }, */
     { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
     { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
     { MODKEY|ALTKEY,             XK_comma,  tagmon,         {.i = -1 } },
