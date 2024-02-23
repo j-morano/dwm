@@ -13,6 +13,15 @@ xrandr \
     --rate 75 \
     --output HDMI-0 --mode 2560x1440 --rotate right --pos 0x0 \
     --rate 60
+
+# Wallpaper
 feh --bg-fill ~/.config/Pictures/bubbles.jpg &
+
+# Date with the following format: week_day month day hour:minute year
+# Example: Tue Mar 29 10:00 2016
+while xsetroot -name "`date +\"%a %b %d %H:%M %Y\"` | "
+do
+    sleep 1
+done &
 
 exec /usr/local/bin/dwm
