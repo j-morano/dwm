@@ -13,6 +13,6 @@ xrandr \
     --rate 75 \
     --output HDMI-0 --mode 2560x1440 --rotate right --pos 0x0 \
     --rate 60
-feh --bg-fill ~/.config/Pictures/iss.jpg &
+feh --bg-fill ~/.config/Pictures/bubbles.jpg &
 
-/usr/local/bin/dwm
+exec /usr/local/bin/dwm

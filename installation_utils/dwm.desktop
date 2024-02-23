@@ -2,6 +2,6 @@
 Encoding=UTF-8
 Name=Dwm
 Comment=Dynamic window manager
-Exec=/home/morano/.config/suckless/run_dwm
+Exec=/home/morano/Documents/dwm/installation_utils/run_dwm
 Icon=dwm
 Type=XSession
