@@ -20,6 +20,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char col_blue[]        = "#a3cbff";
+static const char col_blue_gray[]       = "#6f8e9e";
 static const char col_magenta[]        = "#f396ff";
 static const char col_magenta_gray[]        = "#9a7a9e";
 static const char col_green[]        = "#a3ffcf";
@@ -28,11 +29,11 @@ static const char col_yellow[]        = "#ffeba3";
 static const char *colors[][5]      = {
     /*               fg         bg         border   */
     [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-    [SchemeSel]  = { col_gray4, col_cyan,  col_blue  },
+    [SchemeSel]  = { col_gray4, col_cyan,  col_green  },
     [SchemeSelDeck]  = { col_gray4, col_cyan,  col_magenta  },
     [SchemeSelDeckSingle]  = { col_gray4, col_cyan,  col_magenta_gray  },
-    [SchemeSelMax]  = { col_gray4, col_cyan,  col_green  },
-    [SchemeSelMaxSingle]  = { col_gray4, col_cyan,  col_green_gray  },
+    [SchemeSelMax]  = { col_gray4, col_cyan,  col_blue  },
+    [SchemeSelMaxSingle]  = { col_gray4, col_cyan,  col_blue_gray  },
     [SchemeSelFloat]  = { col_gray4, col_cyan,  col_yellow  },
 };
 
@@ -61,15 +62,15 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
+    { "[M]",      monocle },
     { "[]=",      tile },    /* first entry is default */
     { "><>",      NULL },    /* no layout function means floating behavior */
-    { "[M]",      monocle },
     { "|D",       deck },
 };
 
-static const Layout* TILE = (Layout *) &layouts[0];
-static const Layout* FLOAT = (Layout *) &layouts[1];
-static const Layout* MONOCLE = (Layout *) &layouts[2];
+static const Layout* MONOCLE = (Layout *) &layouts[0];
+static const Layout* TILE = (Layout *) &layouts[1];
+static const Layout* FLOAT = (Layout *) &layouts[2];
 static const Layout* DECK = (Layout *) &layouts[3];
 
 /* key definitions */
