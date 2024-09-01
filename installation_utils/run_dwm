@@ -6,16 +6,17 @@ xset r rate 200 40
 # Daemons and systray
 /usr/bin/nm-applet &
 /usr/bin/pasystray &
+/usr/bin/insync start &
 
 # Screen config
-xrandr \
-    --output HDMI-1 --primary --mode 2560x1440 --rotate normal --pos 1440x0 \
-    --rate 75 \
-    --output HDMI-0 --mode 2560x1440 --rotate right --pos 0x0 \
-    --rate 60
+# xrandr \
+#     --output HDMI-1 --primary --mode 2560x1440 --rotate normal --pos 1440x0 \
+#     --rate 75 \
+#     --output HDMI-0 --mode 2560x1440 --rotate right --pos 0x0 \
+#     --rate 60
 
 # Wallpaper
-feh --bg-fill ~/.config/Pictures/bubbles.jpg &
+feh --bg-fill ~/.config/Pictures/cmon.jpg &
 
 # Date with the following format: week_day month day hour:minute year
 # Example: Tue Mar 29 10:00 2016
