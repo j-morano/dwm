@@ -6,6 +6,8 @@ xset r rate 200 40
 # Daemons and systray
 /usr/bin/nm-applet &
 /usr/bin/pasystray &
+/bin/insync start &
+/usr/bin/blueman-applet &
 
 # Screen config
 xrandr \
@@ -15,7 +17,7 @@ xrandr \
     --rate 60
 
 # Wallpaper
-feh --bg-fill ~/.config/Pictures/bubbles.jpg &
+feh --bg-fill ~/.config/Pictures/cmon.jpg &
 
 # Date with the following format: week_day month day hour:minute year
 # Example: Tue Mar 29 10:00 2016
