@@ -2,6 +2,7 @@
 
 # Keyboard repeat key speed
 xset r rate 200 40
+xinput set-prop 11 346 1
 
 # Daemons and systray
 /usr/bin/nm-applet &
@@ -21,7 +22,9 @@ feh --bg-fill ~/.config/Pictures/cmon.jpg &
 
 # Date with the following format: week_day month day hour:minute year
 # Example: Tue Mar 29 10:00 2016
-while xsetroot -name "`date +\"%a %b %d %H:%M %Y\"` | "
+# while xsetroot -name "`date +\"%a %b %d %H:%M %Y\"` | "
+# From as script with prints
+while xsetroot -name "`/home/morano/Programs/dwm/installation_utils/status`"
 do
     sleep 1
 done &

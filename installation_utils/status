@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import datetime
+from pathlib import Path
+import argparse
+import os
+
+
+
+battery = open('/sys/class/power_supply/BAT0/capacity').read().strip()
+status = open('/sys/class/power_supply/BAT0/status').read().strip()
+print(battery, end='%')
+if int(battery) < 20 and status == 'Discharging':
+    print('🪫', end='| ')
+    # if second is modulo 60, then notify
+    if datetime.datetime.now().second % 60 == 0:
+        os.system(
+            'notify-send -u critical "Battery low" "Battery is at {}%"'
+            .format(battery)
+        )
+elif status == 'Charging':
+    print('🔌', end='| ')
+else:
+    print('🔋', end='| ')
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--toggle', action='store_true')
+args = parser.parse_args()
+
+hide_time_fn = Path('/tmp/hide_time')
+
+if args.toggle:
+    if hide_time_fn.exists():
+        hide_time_fn.unlink()
+    else:
+        hide_time_fn.touch()
+else:
+    # By default, print only date
+    show_time = True
+    if hide_time_fn.exists():
+        show_time = False
+
+    if show_time:
+        str_fr_time = '%F %R'
+    else:
+        str_fr_time = '%F'
+    end = ' | '
+
+    print(datetime.datetime.now().strftime(str_fr_time), end=end)
